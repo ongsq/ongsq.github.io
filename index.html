@@ -57,7 +57,13 @@
               // if so, remove the element from the "Draggable Events" list
               info.draggedEl.parentNode.removeChild(info.draggedEl);
             }
-          }
+          },
+          selectable: true,
+          dateClick: function(info) {
+            alert('clicked ' + info.dateStr);
+          },
+          select: function(info) {
+            alert('selected ' + info.startStr + ' to ' + info.endStr);
         });
 
         calendar.render();
