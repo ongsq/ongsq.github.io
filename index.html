@@ -10,13 +10,22 @@
 
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          themeSystem: 'bootstrap'
+          timeZone: 'UTC',
+          themeSystem: 'bootstrap',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          weekNumbers: true,
+          dayMaxEvents: true, // allow "more" link when too many events
         });
+
         calendar.render();
       });
-     
+      
 
     </script>
   </head>
