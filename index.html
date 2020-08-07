@@ -61,7 +61,7 @@
           selectable: true,
           dateClick: function(info) {
             var myNewEvent = prompt('Add event');
-            if (myNewEvent != null) {
+            if (myNewEvent.length != 0) {
               calendar.addEvent({
                 title: myNewEvent,
                 start: info.dateStr,
