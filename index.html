@@ -9,10 +9,24 @@
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
+        var Calendar = FullCalendar.Calendar;
+        var Draggable = FullCalendar.Draggable;
+        
+        var containerE1 = document.getElementById('external-events');
         var calendarEl = document.getElementById('calendar');
+        var checkbox = document.getElementById('drop-remove');
 
+        new Draggable(containerE1, {
+          itemSelector: '.fc-event',
+          eventData: function(eventE1) {
+            return {
+              title: eventE1.innerText
+            };
+          }
+        });
+        
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          timeZone: 'UTC',
+          timeZone: 'GMT+8',
           themeSystem: 'bootstrap',
           headerToolbar: {
             left: 'prev,next today',
@@ -20,7 +34,14 @@
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
           },
           weekNumbers: true,
+          editable: true,
           dayMaxEvents: true, // allow "more" link when too many events
+          droppable: true,
+          drop: function(info) {
+            if (checkbox.checked) {
+              info.draggedE1.parentNode.removeChild(info.draggedE1);
+            }
+          }
         });
 
         calendar.render();
