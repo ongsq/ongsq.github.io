@@ -11,35 +11,39 @@
       document.addEventListener('DOMContentLoaded', function() {
         var Calendar = FullCalendar.Calendar;
         var Draggable = FullCalendar.Draggable;
-        
-        var containerE1 = document.getElementById('external-events');
+
+        var containerEl = document.getElementById('external-events');
         var calendarEl = document.getElementById('calendar');
         var checkbox = document.getElementById('drop-remove');
 
-        new Draggable(containerE1, {
+        // initialize the external events
+        // -----------------------------------------------------------------
+
+        new Draggable(containerEl, {
           itemSelector: '.fc-event',
-          eventData: function(eventE1) {
+          eventData: function(eventEl) {
             return {
-              title: eventE1.innerText
+              title: eventEl.innerText
             };
           }
         });
-        
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          timeZone: 'GMT+8',
-          themeSystem: 'bootstrap',
+
+        // initialize the calendar
+        // -----------------------------------------------------------------
+
+        var calendar = new Calendar(calendarEl, {
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
           },
-          weekNumbers: true,
           editable: true,
-          dayMaxEvents: true, // allow "more" link when too many events
-          droppable: true,
+          droppable: true, // this allows things to be dropped onto the calendar
           drop: function(info) {
+            // is the "remove after drop" checkbox checked?
             if (checkbox.checked) {
-              info.draggedE1.parentNode.removeChild(info.draggedE1);
+              // if so, remove the element from the "Draggable Events" list
+              info.draggedEl.parentNode.removeChild(info.draggedEl);
             }
           }
         });
