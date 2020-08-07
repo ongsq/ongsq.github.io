@@ -60,14 +60,14 @@
           },
           selectable: true,
           dateClick: function(info) {
-            var myNewEvent = prompt('Add event for ' + info.dateStr);
+            var myNewEvent = prompt('Add event');
             if (myNewEvent != null) {
               calendar.addEvent({
-                title: prompt('Add event for ' + info.dateStr);
+                title: myNewEvent;
                 start: info.dateStr,
                 allDay: true
               });
-            }
+            };
           },
           select: function(info) {
             alert('selected ' + info.startStr + ' to ' + info.endStr);
